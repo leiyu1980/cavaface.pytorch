@@ -21,11 +21,11 @@ This repo provides a high-performance distribute parallel training framework for
     * [x] ResNeXt
     * [ ] DenseNet
     * [x] MobileFaceNet
-    * [ ] MobileNetV3
+    * [x] MobileNetV3
     * [ ] EfficientNet
     * [ ] VargFaceNet
-    * [ ] ProxylessNas
-    * [ ] GhostNet
+    * [x] ProxylessNas
+    * [x] GhostNet
     * [x] AttentionNet-IRSE
     * [x] EfficientPolyFace
     * [x] ResNeSt
@@ -72,7 +72,7 @@ This repo provides a high-performance distribute parallel training framework for
 
 ## Quick start
 ### Installation
-1. Install pytorch==1.4.0 following and torchvision==0.5.0[official instruction](https://pytorch.org/).
+1. Install pytorch==1.4.0 and torchvision==0.5.0 following [official instruction](https://pytorch.org/).
 2. Clone this repo, and we'll call the directory that you cloned as ${WORK_ROOT}.
 3. Install dependencies:
    ```
@@ -86,7 +86,7 @@ This repo provides a high-performance distribute parallel training framework for
 
 ### Training and Testing
 
-#### Training on ms1m-retinaface:
+#### Training on ms1m-retinaface
 ```
 You can change the experimental setting by simply modifying the parameter in the config.py
 bash train.sh
@@ -95,7 +95,7 @@ bash train.sh
 (2)set the checkpoint dir in config.py
 bash evaluate.sh
 ```
-#### Testing on Megaface and IJBC:
+#### Testing on Megaface and IJBC
 1. Put the test data and image list into proper directory.
 2. Start evaluation service.
 ```
@@ -112,14 +112,20 @@ nohup bash run.sh > logs/log &
 
 ## Benchmark
 | Backbone | Head | Loss | Flops | Megaface(Id/ver@1e-6) | IJBC(tar@far=1e-4) |
-| :----: | :----: | :----:| :----: | :----: | :----: |
-| MobileFaceNet | Arcface | Softmax | 440M |  92.8694/93.6329 | 92.80 |
+| :----: | :----: | :----: | :----: | :----: | :----: |
+| MobileFaceNet | Arcface | Softmax | 440M | 92.8694/93.6329 | 92.80 |
+| GhostNet | Arcface | Softmax | 270M | 93.3914/94.3359 | 93.50 |
+| GhostNet_x1.3 | Arcface | Softmax | 440M | 95.3005/95.7757 | 94.27 |
+| MobileNetV3 | Arcface | Softmax | 430M | 93.9805/95.7314 | 93.57 |
+| ProxylessNAS_mobile | Arcface | Softmax | 630M | 93.2886/95.2094 | 93.74 |
+| ProxylessNAS_cpu | Arcface | Softmax | 860M | 95.4242/95.79 | 94.22 |
 | AttentionNet-IRSE-92 | MV-AM | Softmax | 17.63G | 99.1356/99.3999 | 96.56 |
 | IR-SE-100 | Arcface | Softmax | 24.18G | 99.0881/99.4259 | 96.69 |
 | IR-SE-100 | ArcNegface | Softmax | 24.18G | 99.1304/98.7099 | 96.81 |
 | IR-SE-100 | Curricularface | Softmax| 24.18G | 99.0497/98.6162 | 97.00 |
 | IR-SE-100 | Combined | Softmax| 24.18G | 99.0718/99.4493 | 96.83 |
-| ResNeSt-101 | Arcface | Softmax| 18.45G | 98.6279/98.7307 | 96.65 |
+| IR-SE-100 | CircleLoss | Softplus| 24.18G | 98.5732/98.4834 | 96.52 |
+| ResNeSt-101 | Arcface | Softmax| 18.45G | 98.8746/98.5615 | 96.63 |
 
 
 
